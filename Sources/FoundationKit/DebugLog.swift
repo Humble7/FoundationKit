@@ -10,7 +10,7 @@ import os
 
 // MARK: - DebugLog
 
-enum DebugLog {
+public enum DebugLog {
 
     // MARK: - Configuration
 
@@ -31,7 +31,7 @@ enum DebugLog {
     /// Configure the default subsystem and category
     /// Call this early in app launch (e.g., in AppDelegate)
     @inlinable
-    nonisolated static func configure(subsystem: String? = nil, category: String? = nil) {
+    public nonisolated static func configure(subsystem: String? = nil, category: String? = nil) {
         #if DEBUG
         if let subsystem { defaultSubsystem = subsystem }
         if let category { defaultCategory = category }
@@ -56,7 +56,7 @@ enum DebugLog {
     // MARK: - Simple Logging
 
     @inlinable
-    nonisolated static func debug(_ message: @autoclosure () -> String, category: String? = nil) {
+    public nonisolated static func debug(_ message: @autoclosure () -> String, category: String? = nil) {
         #if DEBUG
         let msg = message()
         logger(category: category).debug("\(msg)")
@@ -64,7 +64,7 @@ enum DebugLog {
     }
 
     @inlinable
-    nonisolated static func info(_ message: @autoclosure () -> String, category: String? = nil) {
+    public nonisolated static func info(_ message: @autoclosure () -> String, category: String? = nil) {
         #if DEBUG
         let msg = message()
         logger(category: category).info("\(msg)")
@@ -72,7 +72,7 @@ enum DebugLog {
     }
 
     @inlinable
-    nonisolated static func error(_ message: @autoclosure () -> String, category: String? = nil) {
+    public nonisolated static func error(_ message: @autoclosure () -> String, category: String? = nil) {
         #if DEBUG
         let msg = message()
         logger(category: category).error("\(msg)")
@@ -82,7 +82,7 @@ enum DebugLog {
     // MARK: - Timing Measurement (Sync)
 
     @inlinable
-    nonisolated static func measure<T>(
+    public nonisolated static func measure<T>(
         _ name: @autoclosure () -> String,
         category: String? = nil,
         _ work: () throws -> T
@@ -103,7 +103,7 @@ enum DebugLog {
     // MARK: - Timing Measurement (Async)
 
     @inlinable
-    static func measure<T: Sendable>(
+    public static func measure<T: Sendable>(
         _ name: @autoclosure () -> String,
         category: String? = nil,
         isolation: isolated (any Actor)? = #isolation,
