@@ -27,40 +27,33 @@ Or add it through Xcode:
 
 ## Features
 
-### Categorized Logging
+### Debug Logging
 
-FoundationKit provides pre-configured `OSLog.Logger` instances for different application domains:
+FoundationKit provides a debug-only logging utility with timing measurement:
 
 ```swift
 import FoundationKit
-import OSLog
 
-// General app logging
-Logger.app.info("Application started")
+// Configure at app launch (optional)
+DebugLog.configure(subsystem: "com.example.MyApp", category: "MyCategory")
 
-// UI and view-related logging
-Logger.ui.debug("View did appear")
+// Simple logging (only active in DEBUG builds)
+DebugLog.debug("Debug message")
+DebugLog.info("Info message")
+DebugLog.error("Error message")
 
-// Data and persistence logging
-Logger.data.error("Failed to save data")
+// Logging with custom category
+DebugLog.debug("UI event", category: "UI")
 
-// Rendering and graphics logging
-Logger.rendering.debug("Frame rendered")
+// Measure synchronous code execution time
+let result = DebugLog.measure("Heavy computation") {
+    performHeavyComputation()
+}
 
-// File operations logging
-Logger.fileOps.info("File saved successfully")
-
-// Export operations (GIF, LivePhoto, etc.)
-Logger.export.info("Export completed")
-
-// Canvas and drawing operations
-Logger.canvas.debug("Canvas updated")
-
-// Brush engine logging
-Logger.brush.debug("Brush stroke applied")
-
-// Performance monitoring
-Logger.performance.info("Operation took 50ms")
+// Measure async code execution time
+let data = await DebugLog.measure("Network request") {
+    await fetchData()
+}
 ```
 
 ### Weak Reference Proxy
@@ -153,7 +146,7 @@ NotificationCenter.default.addObserver(
 ```
 FoundationKit/
 ├── Sources/FoundationKit/
-│   ├── Logger+DotShake.swift      # Categorized logging infrastructure
+│   ├── DebugLog.swift             # Debug-only logging with timing measurement
 │   ├── WeakRefVirtualProxy.swift  # Generic weak reference proxy
 │   ├── ErrorMessage.swift         # Structured error type
 │   ├── ErrorPresentation.swift    # Error UI state enum
