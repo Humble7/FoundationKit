@@ -16,8 +16,18 @@ Add the following to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-username/FoundationKit.git", from: "1.0.0")
+    .package(url: "https://github.com/Humble7/FoundationKit.git", from: "0.0.5")
 ]
+
+```
+
+Then add `FoundationKit` to your target's dependencies.
+
+```swift
+.target(
+    name: "YourApp",
+    dependencies: ["FoundationKit"]
+)
 ```
 
 Or add it through Xcode:
@@ -159,7 +169,3 @@ FoundationKit/
 ## License
 
 MIT License
-
-## Author
-
-ChenZhen
